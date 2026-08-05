@@ -1,6 +1,5 @@
 mod counter;
 mod ignore;
-mod stats;
 mod walker;
 
 use anyhow::Result;
@@ -13,6 +12,12 @@ pub fn scan(path: &Path) -> Result<Inventory> {
     let mut inventory = create_inventory(root);
 
     walker::collect_files(&mut inventory)?;
+
+    // Analyze detected languages
+    crate::analyzers::language::detect_languages(&mut inventory);
+
+    // Analyze Rust project (Cargo.toml)
+    crate::analyzers::rust::analyze(&mut inventory)?;
 
     Ok(inventory)
 }

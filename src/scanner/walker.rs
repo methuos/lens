@@ -38,13 +38,14 @@ pub fn collect_files(inventory: &mut Inventory) -> Result<()> {
         let metadata = entry.metadata()?;
         inventory.total_size += metadata.len();
 
-        if let Ok(lines) = count_lines(entry.path()) {
-            inventory.total_lines += lines;
-        }
+        let lines = count_lines(entry.path()).unwrap_or(0);
+        inventory.total_lines += lines;
 
         if let Some(ext) = entry.path().extension() {
             let ext = ext.to_string_lossy().to_lowercase();
-            *inventory.extensions.entry(ext).or_insert(0) += 1;
+
+            *inventory.extensions.entry(ext.clone()).or_insert(0) += 1;
+            *inventory.extension_lines.entry(ext).or_insert(0) += lines;
         }
     }
 
