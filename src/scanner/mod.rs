@@ -1,6 +1,6 @@
-mod counter;
-mod ignore;
-mod walker;
+pub mod counter;
+pub mod ignore;
+pub mod walker;
 
 use anyhow::Result;
 use std::path::{Path, PathBuf};
@@ -12,12 +12,7 @@ pub fn scan(path: &Path) -> Result<Inventory> {
     let mut inventory = create_inventory(root);
 
     walker::collect_files(&mut inventory)?;
-
-    // Analyze detected languages
-    crate::analyzers::language::detect_languages(&mut inventory);
-
-    // Analyze Rust project (Cargo.toml)
-    crate::analyzers::rust::analyze(&mut inventory)?;
+    crate::analyzers::run(&mut inventory)?;
 
     Ok(inventory)
 }

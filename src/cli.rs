@@ -1,22 +1,54 @@
-use clap::Parser;
-use std::path::PathBuf;
+use clap::{Parser, Subcommand, ValueEnum};
 
-#[derive(Parser, Debug)]
-#[command(
-    name = "Lens",
-    version,
-    about = "Analyze a project and generate an inventory report."
-)]
+#[derive(Clone, ValueEnum)]
+pub enum SortBy {
+    Path,
+    Size,
+    Lines,
+}
+
+#[derive(Clone, Copy, Debug, ValueEnum)]
+pub enum OutputFormat {
+    Terminal,
+    Json,
+}
+
+#[derive(Subcommand)]
+pub enum Commands {
+    Summary,
+    Git,
+    Rust,
+    Languages,
+    Largest,
+    Tree,
+    Files {
+        #[arg(long, value_enum, default_value = "path")]
+        sort: SortBy,
+
+        #[arg(long)]
+        reverse: bool,
+
+        #[arg(long, value_enum, default_value = "terminal")]
+        format: OutputFormat,
+    },
+    Dirs {
+    #[arg(long, value_enum, default_value = "path")]
+    sort: SortBy,
+
+    #[arg(long)]
+    reverse: bool,
+
+    #[arg(long, value_enum, default_value = "terminal")]
+    format: OutputFormat,
+}
+}
+
+#[derive(Parser)]
+#[command(author, version, about)]
 pub struct Cli {
-    /// Path to the project
     #[arg(default_value = ".")]
-    pub path: PathBuf,
+    pub path: std::path::PathBuf,
 
-    /// Output Markdown report
-    #[arg(long)]
-    pub markdown: bool,
-
-    /// Output JSON report
-    #[arg(long)]
-    pub json: bool,
+    #[command(subcommand)]
+    pub command: Option<Commands>,
 }
