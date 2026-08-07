@@ -70,3 +70,10 @@ pub struct DirectoryInfo {
     pub lines: usize,
     pub size: u64,
 }
+
+#[derive(Debug, Clone, Serialize)]
+pub struct SearchMatch {
+    pub path: String,
+    pub line: usize,
+    pub text: String,
+}

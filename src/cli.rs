@@ -21,6 +21,14 @@ pub enum Commands {
     Languages,
     Largest,
     Tree,
+   Search {
+    #[arg()]
+    query: String,
+
+    #[arg(long, value_enum, default_value = "terminal")]
+    format: OutputFormat,
+},
+
     Files {
         #[arg(long, value_enum, default_value = "path")]
         sort: SortBy,
@@ -32,15 +40,15 @@ pub enum Commands {
         format: OutputFormat,
     },
     Dirs {
-    #[arg(long, value_enum, default_value = "path")]
-    sort: SortBy,
+        #[arg(long, value_enum, default_value = "path")]
+        sort: SortBy,
 
-    #[arg(long)]
-    reverse: bool,
+        #[arg(long)]
+        reverse: bool,
 
-    #[arg(long, value_enum, default_value = "terminal")]
-    format: OutputFormat,
-}
+        #[arg(long, value_enum, default_value = "terminal")]
+        format: OutputFormat,
+    },
 }
 
 #[derive(Parser)]

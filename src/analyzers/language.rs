@@ -31,5 +31,5 @@ pub fn detect_languages(inventory: &mut Inventory) {
         });
     }
 
-    inventory.languages.sort_by(|a, b| b.lines.cmp(&a.lines));
+    inventory.languages.sort_by_key(|x| std::cmp::Reverse(x.lines));
 }

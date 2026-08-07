@@ -3,6 +3,7 @@ mod cli;
 mod inventory;
 mod output;
 mod scanner;
+mod search;
 mod utils;
 
 use crate::cli::{Cli, Commands};
@@ -28,12 +29,12 @@ fn main() -> Result<()> {
         }
 
         Some(Commands::Dirs {
-    sort,
-    reverse,
-    format,
-}) => {
-    output::dirs::print(&inventory, sort, reverse, format);
-}
+            sort,
+            reverse,
+            format,
+        }) => {
+            output::dirs::print(&inventory, sort, reverse, format);
+        }
 
         Some(Commands::Tree) => {
             output::tree::print(&inventory);
@@ -53,6 +54,10 @@ fn main() -> Result<()> {
 
         Some(Commands::Largest) => {
             output::terminal::print_largest(&inventory);
+        }
+
+        Some(Commands::Search { query, format }) => {
+            search::run(&inventory, &query, format)?;
         }
     }
 

@@ -18,3 +18,35 @@ pub fn format_size(bytes: u64) -> String {
         format!("{} B", bytes as u64)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn formats_bytes() {
+        assert_eq!(format_size(0), "0 B");
+        assert_eq!(format_size(512), "512 B");
+    }
+
+    #[test]
+    fn formats_kilobytes() {
+        assert_eq!(format_size(1024), "1.00 KB");
+        assert_eq!(format_size(1536), "1.50 KB");
+    }
+
+    #[test]
+    fn formats_megabytes() {
+        assert_eq!(format_size(1024 * 1024), "1.00 MB");
+    }
+
+    #[test]
+    fn formats_gigabytes() {
+        assert_eq!(format_size(1024 * 1024 * 1024), "1.00 GB");
+    }
+
+    #[test]
+    fn formats_terabytes() {
+        assert_eq!(format_size(1024_u64.pow(4)), "1.00 TB");
+    }
+}
