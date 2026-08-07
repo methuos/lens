@@ -21,6 +21,10 @@ pub fn print_summary(inventory: &Inventory) {
 }
 
 pub fn print_extensions(inventory: &Inventory) {
+    if inventory.extensions.is_empty() {
+        return;
+    }
+
     println!();
     println!("Extensions");
     println!("----------");

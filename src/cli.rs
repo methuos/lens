@@ -21,13 +21,13 @@ pub enum Commands {
     Languages,
     Largest,
     Tree,
-   Search {
-    #[arg()]
-    query: String,
+    Search {
+        #[arg()]
+        query: String,
 
-    #[arg(long, value_enum, default_value = "terminal")]
-    format: OutputFormat,
-},
+        #[arg(long, value_enum, default_value = "terminal")]
+        format: OutputFormat,
+    },
 
     Files {
         #[arg(long, value_enum, default_value = "path")]

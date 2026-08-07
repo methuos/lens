@@ -49,7 +49,7 @@ pub fn run(inventory: &Inventory, query: &str, format: OutputFormat) -> Result<(
         }
     }
 
-        match format {
+    match format {
         OutputFormat::Terminal => {
             println!();
             println!("{} match(es)", matches);

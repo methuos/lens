@@ -23,11 +23,7 @@ pub(crate) fn sort_dirs(
 }
 
 pub fn print(inventory: &Inventory, sort: SortBy, reverse: bool, format: OutputFormat) {
-    let dirs = sort_dirs(
-    inventory.directories_data.clone(),
-    sort,
-    reverse,
-);
+    let dirs = sort_dirs(inventory.directories_data.clone(), sort, reverse);
 
     match format {
         OutputFormat::Terminal => {}
