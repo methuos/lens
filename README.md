@@ -399,5 +399,6 @@ Planned improvements for future versions may include:
 * Performance improvements for very large projects
 
 ## License
+## License
 
-License information will be added before the first public release.
+Lens is open-source software licensed under the Apache License, Version 2.0.
