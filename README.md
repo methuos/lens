@@ -399,6 +399,5 @@ Planned improvements for future versions may include:
 * Performance improvements for very large projects
 
 ## License
-## License
 
 Lens is open-source software licensed under the Apache License, Version 2.0.
